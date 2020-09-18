@@ -29,5 +29,10 @@ def choose_direction() -> Tuple[int, int]:
 
 # запускает start n_times раз, и возвращает отношение попаданий в тупик к количеству запусков
 def solution(n_times: int) -> float:
-    # TODO
-    pass
+    counter: int = 0
+
+    for i in range(n_times):
+        if start():
+            counter += 1
+
+    return counter / n_times
