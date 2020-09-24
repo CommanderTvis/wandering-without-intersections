@@ -6,8 +6,7 @@ _is_debug: bool = False
 
 
 def _vector_add(a: _Vector2i, b: _Vector2i) -> _Vector2i:
-    # TODO
-    pass
+    return a[0] + b[0], a[1] + b[1]
 
 
 def _run(size_of_field: int) -> bool:
