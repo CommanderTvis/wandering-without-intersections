@@ -34,7 +34,7 @@ def _choose_direction(current_point: _Vector2i, field: _Field) -> Tuple[Optional
             not_visited.append((None, True))
             continue
 
-        if field[xi][yi]:
+        if not field[xi][yi]:
             not_visited.append((i, False))
 
     if not not_visited:
