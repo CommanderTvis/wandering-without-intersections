@@ -31,6 +31,11 @@ def _run(size_of_field: int) -> bool:
         x, y = current_point
         field[x][y] = True
 
+        if _is_debug:
+            print("".join(["".join(
+                ["O" if idx_x == current_point[0] and idx_y == current_point[1] else "*" if value else "+" for
+                 idx_y, value in enumerate(line)]) + "\n" for idx_x, line in enumerate(field)]))
+
 
 _directions: List[_Vector2i] = [(0, 1), (0, -1), (-1, 0), (1, 0)]
 
