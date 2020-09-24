@@ -1,5 +1,5 @@
 from operator import add
-from random import randrange, choice
+from random import choice, randrange
 from typing import List, Tuple, Optional
 
 _Field = List[List[bool]]
