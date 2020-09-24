@@ -1,38 +1,44 @@
-from typing import List, Tuple
+from typing import List, Tuple, Optional
 
-field: List[List[bool]]
-current_point: Tuple[int, int]
+Field = List[List[bool]]
+Vector2i = Tuple[int, int]
+is_debug: bool = False
 
 
-# присваивает в field двумерный список булев с size столбцов и size строк
-def make_field(size: int) -> None:
+def _vector_add(a: Vector2i, b: Vector2i) -> Vector2i:
     # TODO
     pass
 
 
-# 1. создает поле.
-# 2. выбирает случайную точку.
-# 3. устанавливает current_point на эту точку.
-# 4. циклически выбирает случайные вектора
-# (до тех пор, как она не попадает в тупик или не выйдет за пределы поля)
-# 5. возвращает, попала ли собака в тупик (или вышла из "города")
-def start() -> bool:
+def _run(size_of_field: int) -> bool:
     # TODO
     pass
 
 
-# возвращает случайный кортеж со случайными значениями вида (0, 1), (0, -1), (-1, 0), (1, 0)
-def choose_direction() -> Tuple[int, int]:
+_directions: List[Vector2i] = [(0, 1), (0, -1), (-1, 0), (1, 0)]
+
+
+def _choose_direction(current_point: Vector2i, field: Field) -> Tuple[Optional[Vector2i], bool]:
     # TODO
     pass
 
 
-# запускает start n_times раз, и возвращает отношение попаданий в тупик к количеству запусков
-def solution(n_times: int) -> float:
-    counter: int = 0
+def _solution(n_times: int, size_of_field: int) -> float:
+    counter = 0
 
     for i in range(n_times):
-        if start():
+        if _run(size_of_field):
             counter += 1
 
     return float(counter) / n_times
+
+
+is_debug_input = input("Turn on debug mode (y/n)? ")
+
+if is_debug_input == "y":
+    is_debug = True
+
+n_times_input = int(input("Enter the quantity of times to run the algorithm: "))
+size_of_field_input = int(input("Enter the size of field: "))
+probability = _solution(n_times_input, size_of_field_input)
+print(f"The posterior probability is {probability}")
