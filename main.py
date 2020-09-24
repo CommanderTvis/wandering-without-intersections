@@ -17,8 +17,19 @@ def _run(size_of_field: int) -> bool:
     current_point: _Vector2i = randrange(size_of_field), randrange(size_of_field)
     x, y = current_point
     field[x][y] = True
-    # TODO
-    pass
+
+    while True:
+        increment, is_outside = _choose_direction(current_point, field)
+
+        if is_outside:
+            return True  # вышла из города
+
+        if increment is None:
+            return False  # попала в тупик
+
+        current_point = _vector_add(current_point, increment)
+        x, y = current_point
+        field[x][y] = True
 
 
 _directions: List[_Vector2i] = [(0, 1), (0, -1), (-1, 0), (1, 0)]
