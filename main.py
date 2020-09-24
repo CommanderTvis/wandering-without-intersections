@@ -1,3 +1,4 @@
+from random import randrange
 from typing import List, Tuple, Optional
 
 _Field = List[List[bool]]
@@ -10,6 +11,17 @@ def _vector_add(a: _Vector2i, b: _Vector2i) -> _Vector2i:
 
 
 def _run(size_of_field: int) -> bool:
+    field = []
+
+    for _ in range(size_of_field):
+        l = []
+
+        for _ in range(size_of_field):
+            l.append(False)
+
+        field.append(l)
+
+    current_point: _Vector2i = randrange(size_of_field), randrange(size_of_field)
     # TODO
     pass
 
