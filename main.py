@@ -1,5 +1,5 @@
 from operator import add
-from random import randrange
+from random import randrange, choice
 from typing import List, Tuple, Optional
 
 _Field = List[List[bool]]
@@ -25,8 +25,22 @@ _directions: List[_Vector2i] = [(0, 1), (0, -1), (-1, 0), (1, 0)]
 
 
 def _choose_direction(current_point: _Vector2i, field: _Field) -> Tuple[Optional[_Vector2i], bool]:
-    # TODO
-    pass
+    not_visited: List[Tuple[Optional[_Vector2i], bool]] = []
+
+    for i in _directions:
+        xi, yi = _vector_add(current_point, i)
+
+        if xi >= len(field) or yi >= len(field) or xi < 0 or yi < 0:
+            not_visited.append((None, True))
+            continue
+
+        if field[xi][yi]:
+            not_visited.append((i, False))
+
+    if not not_visited:
+        return None, False
+
+    return choice(not_visited)
 
 
 def _solution(n_times: int, size_of_field: int) -> float:
