@@ -1,3 +1,4 @@
+from operator import add
 from random import randrange
 from typing import List, Tuple, Optional
 
@@ -6,22 +7,16 @@ _Vector2i = Tuple[int, int]
 _is_debug: bool = False
 
 
+# noinspection PyTypeChecker
 def _vector_add(a: _Vector2i, b: _Vector2i) -> _Vector2i:
-    return a[0] + b[0], a[1] + b[1]
+    return tuple(map(add, a, b))
 
 
 def _run(size_of_field: int) -> bool:
-    field = []
-
-    for _ in range(size_of_field):
-        l = []
-
-        for _ in range(size_of_field):
-            l.append(False)
-
-        field.append(l)
-
+    field = [[False for _ in range(size_of_field)] for _ in range(size_of_field)]
     current_point: _Vector2i = randrange(size_of_field), randrange(size_of_field)
+    x, y = current_point
+    field[x][y] = True
     # TODO
     pass
 
