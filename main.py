@@ -4,7 +4,7 @@ from typing import List, Tuple, Optional
 
 _Field = List[List[bool]]
 _Vector2i = Tuple[int, int]
-_is_debug: bool = False
+is_debug: bool = False
 
 
 # noinspection PyTypeChecker
@@ -13,15 +13,20 @@ def _vector_add(a: _Vector2i, b: _Vector2i) -> _Vector2i:
 
 
 def _run(size_of_field: int) -> bool:
+    # тут создается квадрат
     field = [[False for _ in range(size_of_field)] for _ in range(size_of_field)]
     current_point: _Vector2i = randrange(size_of_field), randrange(size_of_field)
     x, y = current_point
+    # черепашка помещается на x, y
     field[x][y] = True
 
     while True:
+        increment: _Vector2i
+        is_outside: bool
         increment, is_outside = _choose_direction(current_point, field)
 
         if is_outside:
+            # выход из города
             return True  # вышла из города
 
         if increment is None:
@@ -29,9 +34,10 @@ def _run(size_of_field: int) -> bool:
 
         current_point = _vector_add(current_point, increment)
         x, y = current_point
+        # черепашка помещается на x, y
         field[x][y] = True
 
-        if _is_debug:
+        if is_debug:
             print("".join(["".join(
                 ["O" if idx_x == current_point[0] and idx_y == current_point[1] else "*" if value else "+" for
                  idx_y, value in enumerate(line)]) + "\n" for idx_x, line in enumerate(field)]))
@@ -59,7 +65,7 @@ def _choose_direction(current_point: _Vector2i, field: _Field) -> Tuple[Optional
     return choice(not_visited)
 
 
-def _solution(n_times: int, size_of_field: int) -> float:
+def solution(n_times: int, size_of_field: int) -> float:
     counter = 0
 
     for i in range(n_times):
@@ -67,14 +73,3 @@ def _solution(n_times: int, size_of_field: int) -> float:
             counter += 1
 
     return float(counter) / n_times
-
-
-_is_debug_input = input("Turn on debug mode (y/n)? ")
-
-if _is_debug_input == "y":
-    _is_debug = True
-
-_n_times_input = int(input("Enter the quantity of times to run the algorithm: "))
-_size_of_field_input = int(input("Enter the size of field: "))
-_probability = _solution(_n_times_input, _size_of_field_input)
-print(f"The posterior probability of escaping the field is {_probability}")
