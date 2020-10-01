@@ -12,9 +12,10 @@ def _vector_add(a: Vector2i, b: Vector2i) -> Vector2i:
     return tuple(map(add, a, b))
 
 
-def run(size_of_field: int, on_moved: Callable[[Vector2i], None] = lambda x: None) -> bool:
+def run(size_of_field: int, on_moved: Callable[[Vector2i, bool], None] = lambda x: None) -> bool:
     field = [[False for _ in range(size_of_field)] for _ in range(size_of_field)]
     current_point = randrange(size_of_field), randrange(size_of_field)
+    on_moved(current_point, True)
     x, y = current_point
     field[x][y] = True
 
@@ -28,8 +29,8 @@ def run(size_of_field: int, on_moved: Callable[[Vector2i], None] = lambda x: Non
             return False  # попала в тупик
 
         current_point = _vector_add(current_point, increment)
-        on_moved(current_point)
         x, y = current_point
+        on_moved(current_point, False)
         field[x][y] = True
 
         if is_debug:
