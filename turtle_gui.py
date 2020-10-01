@@ -6,7 +6,7 @@ _turtle: Turtle = Turtle()
 _screen: Screen = Screen()
 _dpi: int = 30
 _size_of_field_input: int = int(_screen.textinput("Size of field", "Enter the size of field: "))
-_side = _size_of_field_input * _dpi
+_side: int = _size_of_field_input * _dpi
 _turtle.goto(0, _side)
 _turtle.goto(_side, _side)
 _turtle.goto(_side, 0)

@@ -61,7 +61,7 @@ def _choose_direction(current_point: Vector2i, field: _Field) -> Tuple[Optional[
     return choice(not_visited)
 
 
-def solution(n_times: int, size_of_field: int) -> float:
+def probability(n_times: int, size_of_field: int) -> float:
     counter = 0
 
     for i in range(n_times):
